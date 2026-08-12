@@ -12,7 +12,9 @@ classes; Fountible converts it into native, fully editable layers.
 ## The `insert_html` contract
 
 - **Use the document's own theme.** Call `list_variables_and_fonts` first and
-  prefer `bg-brand` over `bg-[#0ea5e9]`.
+  prefer `bg-brand` over `bg-[#0ea5e9]`. If it reports enabled team libraries,
+  their tokens are not in that list yet — search with `list_library_assets` and
+  link what you need with `use_library_variable` (→ `fountible-tokens`).
 - **Desktop-first, around 1280px.** `md:` and `lg:` variants are fine and are
   preserved as authored.
 - **No `<script>`, no `<style>`.** Styling is classes.

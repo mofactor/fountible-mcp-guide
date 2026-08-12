@@ -95,6 +95,7 @@ Don't retry — the user needs edit access.
 | A vector shape / icon / graphic | `insert_shape`, `insert_icon`, `insert_svg` |
 | Change something that exists | `edit_nodes` (→ `fountible-edit-design`) |
 | Colors and spacing as tokens | `list_variables_and_fonts`, `create_variable` |
+| A token or component from a team library | `list_library_assets`, then `use_library_variable` / `insert_library_component` (→ `fountible-tokens`) |
 | Motion | `set_animation`, `set_timeline`, `follow_path` (→ `fountible-motion`) |
 | Pull in a real web page | `import_url` (→ `fountible-import`) |
 | Turn a design into code | `read_selection` (→ `fountible-to-code`) |
