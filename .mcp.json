@@ -1,0 +1,37 @@
+{
+  "mcpServers": {
+    "fountible": {
+      "command": "npx",
+      "args": ["-y", "fountible-mcp@latest"],
+      "_meta": {
+        "ideToolIconPath": "./assets/fountible-icon-mono.svg",
+        "ideToolIconRendersAsTemplate": true,
+        "ideToolTitles": {
+          "list_open_files": "List open Fountible files",
+          "read_canvas_outline": "Read canvas outline",
+          "read_node": "Read layer",
+          "read_selection": "Read selection",
+          "list_variables_and_fonts": "List variables and fonts",
+          "screenshot_node": "Screenshot layer",
+          "search_icons": "Search icons",
+          "insert_html": "Insert HTML",
+          "insert_svg": "Insert SVG",
+          "insert_shape": "Insert shape",
+          "insert_icon": "Insert icon",
+          "insert_shader": "Insert shader layer",
+          "import_url": "Import a web page",
+          "search_stock_images": "Search stock photos",
+          "insert_stock_image": "Insert stock photo",
+          "edit_nodes": "Edit layers",
+          "create_variable": "Create variable",
+          "select_nodes": "Select layers",
+          "remove_background": "Remove image background",
+          "set_animation": "Set animation preset",
+          "set_timeline": "Set keyframe timeline",
+          "follow_path": "Animate along a path",
+          "text_on_path": "Set text on a path"
+        }
+      }
+    }
+  }
+}

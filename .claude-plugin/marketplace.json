@@ -1,0 +1,21 @@
+{
+  "name": "fountible",
+  "description": "Fountible design tooling for Claude Code — canvas skills and the Fountible MCP server.",
+  "owner": {
+    "name": "Fountible",
+    "email": "support@fountible.com",
+    "url": "https://fountible.com"
+  },
+  "plugins": [
+    {
+      "name": "fountible",
+      "source": "./",
+      "version": "0.2.0",
+      "description": "Design and edit on the Fountible canvas from your editor — read open files as Tailwind JSX, build screens from HTML, edit layers, author motion, and implement designs in your codebase.",
+      "category": "design",
+      "keywords": ["design", "canvas", "tailwind", "design-to-code", "motion"],
+      "homepage": "https://fountible.com/docs/mcp",
+      "license": "MIT"
+    }
+  ]
+}

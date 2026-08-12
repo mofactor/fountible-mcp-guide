@@ -1,0 +1,88 @@
+---
+name: fountible-motion
+description: "Animate Fountible layers: preset effects with per-letter splits, declarative keyframe timelines, and motion-path travel along a curve."
+when_to_use: "TRIGGER on 'animate', 'add motion', 'make it fade / slide / bounce / spin / orbit', 'stagger the letters', 'add a timeline', 'make it arc across the screen', 'text on a curve'."
+---
+
+# Motion
+
+Three layers. Pick the lowest one that does the job.
+
+```
+A preset?                → set_animation
+Precise keyframes?       → set_timeline
+Travelling along a curve? → follow_path   (letters bending along it? → text_on_path)
+```
+
+## 1. `set_animation` — presets
+
+Categories: **Enter** (fade-in, slide-in, scale-in, blur-in, rotate-in,
+flip-in), **Text** (letters-fade-in, letters-rise, mask-reveal, words-fade-in,
+letters-flip, letters-scale, letters-wave), **Emphasis** (grow, shrink,
+wiggle), **Loop** (spin, pulse, float). Triggers: `load`, `inView`, `hover`,
+`press`, `loop`.
+
+**Per-letter motion:** apply the effect to the **text layer** and pass
+`split: {by: "chars" | "words"}` with a `stagger`. The split happens only
+during playback, so the layer stays one editable text layer the user can
+double-click and retype. Do not pre-split text into separate layers to get this
+effect — that destroys editability.
+
+`stagger` without `split` needs two or more real child nodes.
+`wrap: "clip"` plus a translateY effect gives the mask-reveal look.
+
+`clear: true` removes authored motion — that's why this tool reports as
+destructive.
+
+## 2. `set_timeline` — declarative keyframes
+
+On a **top-level frame only**. It replaces the same-named clip's tracks, so
+re-running it is an update, not an append.
+
+**Channel semantics are what models get wrong:**
+
+| Channel | Meaning |
+| --- | --- |
+| `x`, `y` | px **offsets** from the designed position. `0` = at rest. |
+| `rotate` | degree **offset**. |
+| `scale`, `scaleX`, `scaleY` | **multipliers**. `1` = at rest, not `100`. |
+| `opacity` | **absolute** 0–1. |
+| `width`, `height`, `cornerRadius` | absolute px; resize about the transform origin |
+| `fill`, `stroke` | CSS colours; only on layers with a *solid* fill/stroke |
+| `textOffset` | fraction a text run has slid along a `text_on_path` curve; deliberately unclamped, so `-0.4 → 1.4` scrolls a headline on from before the start and off past the end, and `0 → 1` on a closed ring orbits once |
+
+**Each keyframe's `ease` shapes the segment INTO it.** An accelerating fall is
+`inQuad` on the impact keyframe; a decelerating rise is `outQuad` on the apex.
+Default is `outCubic`. Named eases, cubic-bezier, and spring forms all work.
+
+For a squash pivot, set an `origin-[50%_100%]` class on the layer *first* —
+width/height keyframes resize about the transform origin.
+
+A component instance plays the **main component's** timeline. Author it there,
+not on the instance.
+
+## 3. `follow_path` — travel along a curve
+
+Prefer `shape` (`circle`, `ellipse`, `arch`, `rounded-rect`): it sizes the
+guide from the layer, caps it to the artboard, starts at the rest pose so
+nothing jumps at t=0, and leaves a **parametric** guide the user can drag
+afterwards.
+
+Otherwise pass `d` — an SVG path in **px offsets from the layer's current
+position**, starting `M 0 0`.
+
+`orient: true` turns the layer to face travel direction; `orientOffset: -90`
+for artwork drawn nose-up.
+
+A real curve beats a dozen hand-placed x/y keyframes — it stays editable and
+reads as one intention.
+
+On a text layer, `follow_path` carries the whole block rigidly with the type
+straight. Use **`text_on_path`** when the letters themselves should bend along
+the curve.
+
+## Afterwards
+
+Effects export as plain anime.js code, and the user plays timelines from the
+frame's Timelines section. Tell them where to hit play — motion they can't find
+reads as motion that didn't happen.

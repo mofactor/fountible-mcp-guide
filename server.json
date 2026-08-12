@@ -1,0 +1,19 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.mofactor/fountible-mcp",
+  "title": "Fountible",
+  "description": "Read and edit the design files open in the Fountible app — canvas outline, Tailwind JSX, HTML and SVG insertion, layer edits, design tokens, and keyframe motion.",
+  "repository": {
+    "url": "https://github.com/mofactor/fountible-mcp-guide",
+    "source": "github"
+  },
+  "version": "0.2.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "fountible-mcp",
+      "version": "0.2.0",
+      "transport": { "type": "stdio" }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "fountible",
+  "displayName": "Fountible",
+  "description": "Plugin that includes the Fountible MCP server and skills for design, editing, motion, and design-to-code workflows",
+  "version": "0.2.0",
+  "author": { "name": "Fountible" },
+  "logo": "./assets/fountible-icon-mono.svg",
+  "keywords": ["design", "canvas", "tailwind", "design-to-code", "motion"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}
