@@ -13,6 +13,11 @@ edit, and undoes as a single step.
 > nothing at all when Fountible isn't running.
 > Download: <https://fountible.com/download>
 
+**Where this works:** Claude Code and Claude Desktop, plus Cursor and other
+MCP clients that run on your own machine. It does **not** work on claude.ai,
+Claude mobile, or Cowork — those run in the cloud and cannot reach a server
+listening on your laptop's `127.0.0.1`.
+
 ## Install
 
 **Claude Code**

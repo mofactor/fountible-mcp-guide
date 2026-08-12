@@ -4,7 +4,10 @@
   "displayName": "Fountible",
   "version": "0.2.0",
   "description": "Design and edit on the Fountible canvas from your editor. Read open design files as Tailwind JSX, build screens from HTML, edit layers, author keyframe and motion-path animation, and implement a design in your codebase — every change lands live, attributed like a collaborator's, and undoes as one step.",
-  "author": { "name": "Fountible", "url": "https://fountible.com" },
+  "author": {
+    "name": "Fountible",
+    "url": "https://fountible.com"
+  },
   "homepage": "https://fountible.com/docs/mcp",
   "repository": "https://github.com/mofactor/fountible-mcp-guide",
   "license": "MIT",
@@ -22,6 +25,8 @@
   ],
   "skills": "./skills/",
   "commands": "./commands/",
-  "agents": ["./agents/fountible-implementer.md"],
+  "agents": [
+    "./agents/fountible-implementer.md"
+  ],
   "mcpServers": "./.mcp.json"
 }

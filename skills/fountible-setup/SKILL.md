@@ -18,7 +18,15 @@ Call `list_open_files`. Exactly three things can come back.
 
 ## Not running
 
-Three things must all be true. Check them in this order — each is a common stopping point.
+**First, check where you are running.** This connector reaches a server on the
+user's own machine, so it only works in a client that runs there too: Claude
+Code, Claude Desktop, Cursor, and similar. On claude.ai, Claude mobile, or
+Cowork it can never connect, because those run in the cloud and cannot reach
+`127.0.0.1` on someone's laptop. If that is the situation, say so plainly
+rather than walking the user through the steps below — none of them will help.
+
+Otherwise, three things must all be true. Check them in this order — each is a
+common stopping point.
 
 1. **The Fountible *desktop app* is running.** Connectors are desktop-only. The
    browser app at app.fountible.com cannot serve them, because the endpoint is
