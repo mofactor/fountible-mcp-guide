@@ -29,6 +29,7 @@
           "use_library_variable": "Link a library token",
           "select_nodes": "Select layers",
           "remove_background": "Remove image background",
+          "make_interactive": "Make layers interactive",
           "set_animation": "Set animation preset",
           "set_timeline": "Set keyframe timeline",
           "follow_path": "Animate along a path",

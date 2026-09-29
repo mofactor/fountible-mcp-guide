@@ -49,6 +49,9 @@ tools that reach the network:
 - `search_stock_images` / `insert_stock_image` query a third-party stock
   provider.
 - `remove_background` runs a matting model.
+- `make_interactive` sends a compact outline of the selected frame (layer
+  names, short labels, classes) through **Fountible's backend** to a pattern
+  classifier; offline it decides locally.
 
 Everything else in this plugin talks only to `127.0.0.1`. Full detail:
 <https://fountible.com/privacy#ai-connectors>

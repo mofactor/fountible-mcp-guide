@@ -48,7 +48,8 @@ enabled — so regenerating the token in Settings never breaks this plugin.
 **Create** — `insert_html`, `insert_svg`, `insert_shape`, `insert_icon`,
 `insert_shader`, `import_url`, `search_stock_images`, `insert_stock_image`
 
-**Edit** — `edit_nodes`, `create_variable`, `select_nodes`, `remove_background`
+**Edit** — `edit_nodes`, `create_variable`, `select_nodes`, `remove_background`,
+`make_interactive`
 
 **Motion** — `set_animation`, `set_timeline`, `follow_path`, `text_on_path`
 

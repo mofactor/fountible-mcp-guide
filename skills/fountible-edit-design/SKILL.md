@@ -70,3 +70,14 @@ say what you removed.
   `pointer-events-none` or `pointer-events-auto`.
 - **Introducing a colour you'll reuse?** `create_variable` first, then use the
   utility it mints. See `fountible-tokens`.
+
+## Making it work: `make_interactive`
+
+Tabs, accordions / FAQs, dropdown menus, toggles / switches and hoverable
+cards can actually work in Preview and while presenting. Build them as ONE
+container frame — the triggers as plain layers, one panel per trigger, only the
+active panel visible, the active trigger styled differently — then call
+`make_interactive` with that frame's `nodeId` (and `pattern` if you know it).
+For everything but hover, the frame becomes a component and a linked instance
+with a **new id** takes its place: use the returned id afterwards. A refusal
+says what to restructure.
