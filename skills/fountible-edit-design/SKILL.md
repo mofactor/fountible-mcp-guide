@@ -51,9 +51,19 @@ when you actually hit it.
   source.
 
 **Structure**
-- `rename`, `set_visible`, `duplicate`
-- `reparent` `{parentId, index?}`
+- `rename`, `set_visible`
+- `reparent` `{parentId, index?}` — `index` reorders a child inside its parent.
+- `move` `{id, x, y}` — the only way to reposition a top-level layer (one whose
+  outline line shows `@ (x, y)`), in those same coordinates; a layer marked
+  `in section` is relative to that section. `left-`/`top-` classes and
+  `set_prop` do **not** move a top-level layer, and are refused or flagged.
+- `duplicate` `{id, x?, y?}` — a top-level copy lands at `x`/`y`, or in free
+  space to the right of its source. The reply prints where each copy landed.
 - `delete`
+
+To arrange frames in a row or grid, work out each `x`/`y` from the sizes in the
+outline and send one `move` (or `duplicate` with `x`/`y`) per frame in a single
+call. Never report a position you did not read in a reply or in the outline.
 
 `reparent` and `delete` are the destructive ones — they are what makes
 `edit_nodes` report `destructiveHint: true`. Be sure before you send them, and
