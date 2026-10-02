@@ -33,7 +33,8 @@
           "set_animation": "Set animation preset",
           "set_timeline": "Set keyframe timeline",
           "follow_path": "Animate along a path",
-          "text_on_path": "Set text on a path"
+          "text_on_path": "Set text on a path",
+          "add_timeline_audio": "Add sound to a timeline"
         }
       }
     }

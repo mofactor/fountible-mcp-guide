@@ -81,6 +81,21 @@ On a text layer, `follow_path` carries the whole block rigidly with the type
 straight. Use **`text_on_path`** when the letters themselves should bend along
 the curve.
 
+## Sound — `add_timeline_audio`
+
+Puts a voiceover, a music bed or a sound effect on a top-level frame's
+timeline from an **https link to the audio file itself** (MP3, WAV, M4A, OGG).
+The sound is copied into the document, so a short-lived download link is fine.
+
+- `at` is where it starts, in ms. The timeline grows to fit the sound.
+- Sounds overlap freely: a voiceover and music are two calls. Put music under
+  a voice with `volume: 25`.
+- A frame with no timeline gets one, so sound can come before any keyframes.
+- It plays in preview and is mixed into the exported MP4.
+
+Fountible does not make the audio. If the user has another tool that does, get
+the file's download link from it and pass that here.
+
 ## Afterwards
 
 Effects export as plain anime.js code, and the user plays timelines from the
