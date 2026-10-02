@@ -55,6 +55,10 @@ re-running it is an update, not an append.
 | `draw` | a stroke that draws itself: the **fraction 0–1** of a vector layer's stroke drawn from the start of its path. `0` = nothing, `1` = the whole stroke (the design), not `100`; `0 → 1` draws it on, `1 → 0` erases it. Vector layers only — paths, lines, ellipses, polygons, stars, icons, inserted SVG — with a visible, undashed stroke. Frames and rectangles are refused: their strokes are CSS borders with no path, so draw the outline with `insert_svg` instead. The fill is not affected (give the shape no fill for a pure line-draw); a layer with several paths draws them together |
 | `clipTop`, `clipRight`, `clipBottom`, `clipLeft` | wipes and reveals on any layer: the **percentage 0–100** of the layer clipped away from that edge. `0` = that edge not clipped (the design), `100` = clipped all the way across, not `1`. The channel names the edge that is *hidden*, so the reveal travels from the opposite one: `clipRight` `100 → 0` wipes in from the left, `clipBottom` `100 → 0` from the top down; `0 → 100` wipes out. Key several edges together for other reveals (`clipLeft` and `clipRight` `50 → 0` opens from the center). Children and shadows are clipped with the layer and nothing around it shifts. Refused on a layer clipped by a vector mask — wipe the frame or group around it instead |
 
+**Cascades are one track:** pass `nodeIds` instead of `nodeId`, plus
+`stagger: {each, from}` — every layer gets the same keyframes, shifted by its
+order × `each` ms (`from`: `first`, `last`, `center`, `edges`).
+
 **Each keyframe's `ease` shapes the segment INTO it.** An accelerating fall is
 `inQuad` on the impact keyframe; a decelerating rise is `outQuad` on the apex.
 Default is `outCubic`. Named eases, cubic-bezier, and spring forms all work.
