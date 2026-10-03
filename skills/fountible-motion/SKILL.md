@@ -39,6 +39,11 @@ destructive.
 On a **top-level frame only**. It replaces the same-named clip's tracks, so
 re-running it is an update, not an append.
 
+**To fix or tweak part of an existing clip**, pass `merge: true` with ONLY the
+tracks you change (plus `removeTracks: [{nodeId, channel}]`): every other track,
+the audio and the loop stay as they were. Never rewrite a whole clip to fix one
+moment, and never refuse a small fix because the clip is large.
+
 **Channel semantics are what models get wrong:**
 
 | Channel | Meaning |
