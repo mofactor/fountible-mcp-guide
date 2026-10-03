@@ -102,10 +102,23 @@ timeline from an **https link to the audio file itself** (MP3, WAV, M4A, OGG).
 The sound is copied into the document, so a short-lived download link is fine.
 
 - `at` is where it starts, in ms. The timeline grows to fit the sound.
-- Sounds overlap freely: a voiceover and music are two calls. Put music under
-  a voice with `volume: 25`.
+- Sounds overlap freely. Put music under a voice with `volume: 25` — volume is
+  a **percent**, 100 = full, so `1` means 1%.
 - A frame with no timeline gets one, so sound can come before any keyframes.
 - It plays in preview and is mixed into the exported MP4.
+
+**Many sounds, deletes and sync.** Put every sound of a film in ONE call with
+`sounds: [...]`: each item is an add (`url`), a change (`audioId` — only the
+fields you pass change), a file swap (`audioId` + `url`, keeping its placement,
+level and fades) or a delete (`audioId` + `remove: true`), and the whole call is
+one undo step that changes nothing if any item or download fails.
+`removeAudioIds` deletes several at once. Delete a sound to get rid of it —
+never mute it or turn it down — and change one by `audioId` instead of adding a
+second copy. To sync, pass `hitAt` (ms on the timeline) instead of `at`: the
+file is analyzed and started so its main hit, its loudest attack, lands exactly
+there. Every result reports each sound's main hit, its strongest onsets and,
+for clearly rhythmic music, its tempo. `label` names the sound; `clip` (or
+`name`) picks the timeline clip when a frame has several.
 
 Fountible does not make the audio. If the user has another tool that does, get
 the file's download link from it and pass that here.
