@@ -119,8 +119,11 @@ never mute it or turn it down — and change one by `audioId` instead of adding 
 second copy. To sync, pass `hitAt` (ms on the timeline) instead of `at`: the
 file is analyzed and started so its main hit, its loudest attack, lands exactly
 there. Every result reports each sound's main hit, its strongest onsets and,
-for clearly rhythmic music, its tempo. `label` names the sound; `clip` (or
-`name`) picks the timeline clip when a frame has several.
+for clearly rhythmic music, its tempo. Music also gets a music map in timeline
+times — its sections and how loud each is, the drop, bar lines and how it
+ends: put cuts on its section starts and bar lines, and pass `dropAt` instead
+of `at` to land the drop on the film's big moment. `label` names the sound;
+`clip` (or `name`) picks the timeline clip when a frame has several.
 
 Fountible does not make the audio. If the user has another tool that does, get
 the file's download link from it and pass that here.
