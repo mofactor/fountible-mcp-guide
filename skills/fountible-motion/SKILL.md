@@ -106,6 +106,8 @@ The sound is copied into the document, so a short-lived download link is fine.
   a **percent**, 100 = full, so `1` means 1%.
 - A frame with no timeline gets one, so sound can come before any keyframes.
 - It plays in preview and is mixed into the exported MP4.
+- `lane` is the sound's row in the timeline dock (0 = Audio 1): the music bed
+  on 0, effects on 1, more lanes only where effects overlap. Display only.
 
 **Many sounds, deletes and sync.** Put every sound of a film in ONE call with
 `sounds: [...]`: each item is an add (`url`), a change (`audioId` — only the
