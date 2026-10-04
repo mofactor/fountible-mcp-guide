@@ -56,7 +56,8 @@ moment, and never refuse a small fix because the clip is large.
 | `fill`, `stroke` | CSS colours; only on layers with a *solid* fill/stroke |
 | `textOffset` | fraction a text run has slid along a `text_on_path` curve; deliberately unclamped, so `-0.4 → 1.4` scrolls a headline on from before the start and off past the end, and `0 → 1` on a closed ring orbits once |
 | `count` | the **number a text layer displays** at that time: `0 → 84320` counts up. The format comes from the layer's own designed text — prefix, suffix, thousands separators and decimal places are kept, so `$84,320` shows `$42,160` halfway. Set the layer's text to the final number first; needs plain text (no inline-formatted ranges) holding exactly one number, not on a curve — a number inside a sentence goes in its own text layer |
-| `textReveal` | typing: the **fraction 0–1** of a text layer's characters shown from the start. `0` = none, `1` = all, not `100`. The untyped rest keeps its space, so nothing around it shifts. Linear ease reads as steady typing. Not for text on a curve |
+| `textReveal` | typing: the **fraction 0–1** of a text layer's characters shown from the start. `0` = none, `1` = all, not `100`. The untyped rest keeps its space, so nothing around it shifts. Linear ease reads as steady typing. Add `caret: true` to the track for a blinking cursor that follows the typed text: solid while it types, blinking while it rests. Not for text on a curve |
+| `morph` | a VECTOR layer's **shape** becomes other shapes: each keyframe value is the **id of a vector layer** whose shape it takes then (its own id for its own shape), fitted into the layer's box so it changes in place — play icon → pause, blob → blob, circle → star. Make the targets as their own vector layers first, then hide or delete them; the track keeps their shapes. One-path vectors only (flatten artwork whose parts carry their own paints) |
 | `draw` | a stroke that draws itself: the **fraction 0–1** of a vector layer's stroke drawn from the start of its path. `0` = nothing, `1` = the whole stroke (the design), not `100`; `0 → 1` draws it on, `1 → 0` erases it. Vector layers only — paths, lines, ellipses, polygons, stars, icons, inserted SVG — with a visible, undashed stroke. Frames and rectangles are refused: their strokes are CSS borders with no path, so draw the outline with `insert_svg` instead. The fill is not affected (give the shape no fill for a pure line-draw); a layer with several paths draws them together |
 | `clipTop`, `clipRight`, `clipBottom`, `clipLeft` | wipes and reveals on any layer: the **percentage 0–100** of the layer clipped away from that edge. `0` = that edge not clipped (the design), `100` = clipped all the way across, not `1`. The channel names the edge that is *hidden*, so the reveal travels from the opposite one: `clipRight` `100 → 0` wipes in from the left, `clipBottom` `100 → 0` from the top down; `0 → 100` wipes out. Key several edges together for other reveals (`clipLeft` and `clipRight` `50 → 0` opens from the center). Children and shadows are clipped with the layer and nothing around it shifts. Refused on a layer clipped by a vector mask — wipe the frame or group around it instead |
 | `goo` | liquid / metaball merges: the **goo radius in px** of a *container* (frame or group, no fill of its own) — its layers melt into one another where they come close and keep their colors. Key the container, not its children: roughly `8–20` while merging, `0` on the last keyframe to land the exact, crisp shapes. Use it instead of faking goo with stacked blurs and blend modes |
@@ -84,6 +85,12 @@ clip. The exported video then smears fast moves along their path while held
 frames stay sharp. The canvas, Preview and `screenshot_node` stay crisp, so
 judge the blur in the export. Use it for kinetic type, whip moves and spins,
 not calm UI motion.
+
+**Other shapes:** `make_format_copy{frameId, formats: ["9:16", "1:1", "4:5", "16:9"]}`
+makes re-fitted copies of a film beside it, timeline carried over — layers keep
+to their edge or the centre, a scene's groups grow together where the shape
+leaves room, full-frame layers fill. Screenshot each copy at a few times and fix
+what it needs; a 9:16 copy usually wants larger type.
 
 **Video layers play on the film's clock**, and their own sound goes into the
 exported MP4. A clip starts at its `startAt` (ms into the film, `0` = with the
