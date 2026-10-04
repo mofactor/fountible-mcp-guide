@@ -85,6 +85,14 @@ frames stay sharp. The canvas, Preview and `screenshot_node` stay crisp, so
 judge the blur in the export. Use it for kinetic type, whip moves and spins,
 not calm UI motion.
 
+**Video layers play on the film's clock**, and their own sound goes into the
+exported MP4. A clip starts at its `startAt` (ms into the film, `0` = with the
+film). When footage enters late, set `startAt` to that moment with
+`edit_nodes` `set_video{id, video: {startAt}}` so it plays from its first
+frame instead of sitting on its last; add `muted: true` when the timeline's
+music should carry the film. `set_video` also takes `loop`, `volume` (0–1),
+`autoplay` and `controls`, never the clip itself.
+
 For a squash pivot, set an `origin-[50%_100%]` class on the layer *first* —
 width/height keyframes resize about the transform origin.
 

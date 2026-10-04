@@ -40,6 +40,9 @@ when you actually hit it.
   node this **is** the glyph paint) and `strokes` (gradient borders and vector
   strokes; solid/linear/radial, paired with width tokens).
 - `set_shader_params` — merges validated shader knobs.
+- `set_video` — merges a video layer's playback settings: `startAt` (ms into
+  its film before it plays), `loop`, `muted`, `volume`, `autoplay`,
+  `controls`. Never the clip itself.
 
 **Images**
 - `remove_image_fill` removes real image entries while preserving other fills.
