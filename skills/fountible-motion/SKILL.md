@@ -65,6 +65,14 @@ moment, and never refuse a small fix because the clip is large.
 `stagger: {each, from}` — every layer gets the same keyframes, shifted by its
 order × `each` ms (`from`: `first`, `last`, `center`, `edges`).
 
+**Repeats are one cycle:** a pulse, float, breath or spin is written once and
+given `repeat: {times}` — or `{until: <ms>}` to keep going, in whole cycles,
+until then (the clip's duration for all film long). `gap` rests between cycles
+holding the last value; `yoyo: true` plays every other cycle backwards with its
+eases mirrored, so a float is written one way. A cycle that ends on its start
+value loops seamlessly; one that does not jumps back (a `0 → 360` spin
+restarts at `0`). With `nodeIds` + `stagger`, each layer repeats its own copy.
+
 **Each keyframe's `ease` shapes the segment INTO it.** An accelerating fall is
 `inQuad` on the impact keyframe; a decelerating rise is `outQuad` on the apex.
 Default is `outCubic`. Named eases, cubic-bezier, and spring forms all work.
