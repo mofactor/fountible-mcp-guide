@@ -69,6 +69,14 @@ order × `each` ms (`from`: `first`, `last`, `center`, `edges`).
 `inQuad` on the impact keyframe; a decelerating rise is `outQuad` on the apex.
 Default is `outCubic`. Named eases, cubic-bezier, and spring forms all work.
 
+**Motion blur is a clip setting:** `motionBlur: true` (a 180° shutter, film's
+standard) or a shutter angle in degrees (`90` subtle, `360` heavy), `false` to
+turn it off; `merge: true` with only `motionBlur` switches it on an existing
+clip. The exported video then smears fast moves along their path while held
+frames stay sharp. The canvas, Preview and `screenshot_node` stay crisp, so
+judge the blur in the export. Use it for kinetic type, whip moves and spins,
+not calm UI motion.
+
 For a squash pivot, set an `origin-[50%_100%]` class on the layer *first* —
 width/height keyframes resize about the transform origin.
 
@@ -127,6 +135,19 @@ of `at` to land the drop on the film's big moment. `label` names the sound;
 
 Fountible does not make the audio. If the user has another tool that does, get
 the file's download link from it and pass that here.
+
+## Code layers — `insert_code_layer` (when it is in your tools)
+
+For motion keyframes cannot express: particles, a globe, a chart drawing
+itself, generative patterns, and with `engine: "three"` real 3D through
+Three.js — thick extruded type in the design's own fonts (list them in
+`fonts`), lit objects, camera moves. Your code draws from `t` alone, so the
+same moment always paints the same picture and a film exports exactly as it
+previews. It runs in a sandbox with no network, and Fountible runs every
+change before it lands: an error names the line, so fix it with
+`edit_code_layer` find/replace edits instead of resending the whole code. Put
+it inside a film's frame and it draws the timeline's time. The tools appear
+only for people code layers are switched on for.
 
 ## Afterwards
 
