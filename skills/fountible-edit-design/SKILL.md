@@ -1,6 +1,6 @@
 ---
 name: fountible-edit-design
-description: "Change existing Fountible layers — restyle, retext, recolour, reparent, duplicate, delete — batched into single undo steps with edit_nodes."
+description: "Change existing Fountible layers — restyle, retext, recolor, reparent, duplicate, delete — batched into single undo steps with edit_nodes."
 when_to_use: "TRIGGER on 'change the heading', 'make this dark', 'move that into the card', 'fix the spacing', 'delete the third column', 'bold that word', 'swap the gradient' — any modification to something already on a Fountible canvas."
 ---
 
@@ -62,13 +62,21 @@ when you actually hit it.
   `set_prop` do **not** move a top-level layer, and are refused or flagged.
 - `duplicate` `{id, x?, y?}` — a top-level copy lands at `x`/`y`, or in free
   space to the right of its source. The reply prints where each copy landed.
+- `group` `{ids, name?}` — ⌘G: puts layers that share a parent in a Group, in
+  place. A Group has no fill or layout of its own and always hugs what it holds,
+  so it beats a wrapper frame when layers only need to stay together (two
+  vectors that form one mark, an icon and its badge, shapes that move as one).
+  It takes `ids`, not `id`, and the reply gives the new Group's id. Send it in a
+  call that does not also edit those layers.
+- `ungroup` `{id}` — ⌘⇧G: releases a group's or frame's layers in place and
+  removes the container (a frame's own fill and border go with it).
 - `delete`
 
 To arrange frames in a row or grid, work out each `x`/`y` from the sizes in the
 outline and send one `move` (or `duplicate` with `x`/`y`) per frame in a single
 call. Never report a position you did not read in a reply or in the outline.
 
-`reparent` and `delete` are the destructive ones — they are what makes
+`reparent`, `ungroup` and `delete` are the destructive ones — they are what makes
 `edit_nodes` report `destructiveHint: true`. Be sure before you send them, and
 say what you removed.
 
