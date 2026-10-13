@@ -99,10 +99,11 @@ node --version
 
 ## Read-only files
 
-A file the user only has view access to exposes just six tools:
+A file the user only has view access to exposes just eight tools:
 `list_open_files`, `read_canvas_outline`, `read_node`, `read_selection`,
-`list_variables_and_fonts`, `screenshot_node`, and `search_icons`. Every write
-tool answers `Unknown tool "…" for this file. File "…" is read-only.`
+`list_variables_and_fonts`, `list_components`, `screenshot_node`, and
+`select_nodes`. Every write tool answers
+`Unknown tool "…" for this file. File "…" is read-only.`
 
 That is not a retryable error. Tell the user they need edit access.
 

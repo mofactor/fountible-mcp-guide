@@ -43,13 +43,15 @@ enabled — so regenerating the token in Settings never breaks this plugin.
 ## What it can do
 
 **Read** — `list_open_files`, `read_canvas_outline`, `read_node`,
-`read_selection`, `list_variables_and_fonts`, `screenshot_node`, `search_icons`
+`read_selection`, `list_variables_and_fonts`, `list_components`,
+`screenshot_node`, `search_icons`
 
 **Create** — `insert_html`, `insert_svg`, `insert_shape`, `insert_icon`,
-`insert_shader`, `import_url`, `search_stock_images`, `insert_stock_image`
+`insert_shader`, `import_url`, `search_stock_images`, `insert_stock_image`,
+`insert_component`
 
 **Edit** — `edit_nodes`, `create_variable`, `select_nodes`, `remove_background`,
-`make_interactive`
+`make_interactive`, `create_component`
 
 **Motion** — `set_animation`, `set_timeline`, `follow_path`, `text_on_path`
 

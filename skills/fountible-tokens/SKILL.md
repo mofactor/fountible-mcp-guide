@@ -67,7 +67,9 @@ sources of truth for one color.
 
 `insert_library_component` places an instance of a published component. Prefer
 it over hand-writing markup that imitates one: the instance stays linked, so it
-picks up the library's updates.
+picks up the library's updates. Components made in this file are separate:
+`list_components` lists them and `insert_component` places one (→
+`fountible-edit-design`).
 
 ## Fonts
 

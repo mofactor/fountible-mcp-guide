@@ -102,3 +102,40 @@ active panel visible, the active trigger styled differently — then call
 For everything but hover, the frame becomes a component and a linked instance
 with a **new id** takes its place: use the returned id afterwards. A refusal
 says what to restructure.
+
+## Reusable parts: `create_component`
+
+`create_component` turns one container (`nodeId`: a frame, stack or grid; a
+group is converted first, as ⌘⌥K does) into this file's own component, in
+place. Pass `copies` with the ids of near-identical layers elsewhere and each
+becomes a linked instance that keeps its own text, images, classes and
+visibility as overrides. A copy whose structure differs is skipped, untouched,
+with the reason. A lone text or image layer is refused, and a bare text link
+or button imports as one text layer: build each repeated nav item or button
+as a flex box with its label in an inner element
+(`<a class="inline-flex items-center"><span>Home</span></a>`), then link
+them. `name` names the component.
+
+- **New ids.** The main keeps `nodeId` and moves to the component's own canvas;
+  a linked instance with a **new id** takes its place, and each converted copy
+  gets a new id too. The reply lists them as `old → new`: use those afterwards.
+- **Main vs instance.** Editing the main, or layers inside it, changes every
+  instance. Editing an instance's layers changes only that copy. A design
+  duplicated with `duplicate` still shares the same mains, so to change one
+  design only, edit its instances. `delete` inside an instance is skipped: hide
+  the layer with `set_visible` instead. `delete` of a main is skipped too:
+  delete its instances.
+- **Structure first.** Layers can't be added inside an instance, only to the
+  main. Finish adding and removing items before you componentize. Never
+  componentize the tabs, accordion items, dropdown items, triggers or panels of
+  a frame you will make interactive: `make_interactive` needs them as plain
+  layers, an instance can't be detached, and it makes the frame a component
+  itself. Repeats inside one panel may become components, before
+  `make_interactive`. A part of a main that already has instances can't
+  become a component (those instances would lose their own changes).
+- **Reuse.** `list_components` lists this file's components (id, name, main,
+  size, instance count). `insert_component` places a linked instance by id or
+  name, inside `parentId` (at `index`) or at `x`/`y`. A team library's
+  components go through `insert_library_component` instead (→ `fountible-tokens`).
+- `read_canvas_outline` marks an instance root `of "<name>"` and a main
+  `[main of "<name>"]`.

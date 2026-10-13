@@ -83,8 +83,10 @@ and keep working rather than retrying.
 
 ## 9. Read-only files
 
-Six read tools only; every write answers `Unknown tool "…" for this file.`
-Don't retry — the user needs edit access.
+Only `list_open_files`, `read_canvas_outline`, `read_node`, `read_selection`,
+`list_variables_and_fonts`, `list_components`, `screenshot_node` and
+`select_nodes`; every write answers `Unknown tool "…" for this file.` Don't
+retry — the user needs edit access.
 
 ## Which tool
 
@@ -95,6 +97,7 @@ Don't retry — the user needs edit access.
 | A vector shape / icon / graphic | `insert_shape`, `insert_icon`, `insert_svg` |
 | Change something that exists | `edit_nodes` (→ `fountible-edit-design`) |
 | Colors and spacing as tokens | `list_variables_and_fonts`, `create_variable` |
+| Make a repeated part one component, or reuse one from this file | `create_component`, `list_components`, `insert_component` (→ `fountible-edit-design`) |
 | A token or component from a team library | `list_library_assets`, then `use_library_variable` / `insert_library_component` (→ `fountible-tokens`) |
 | Motion | `set_animation`, `set_timeline`, `follow_path` (→ `fountible-motion`) |
 | Pull in a real web page | `import_url` (→ `fountible-import`) |
