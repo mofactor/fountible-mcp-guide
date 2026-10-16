@@ -66,6 +66,10 @@ Read before you write. `edit_nodes` `set_classes` **replaces the entire class
 list** — writing it from memory instead of from a fresh `read_node` is the
 fastest way to destroy someone's design.
 
+On a big page, `read_canvas_outline` `{depth: 1}` lists one line per top-level
+frame (up to 500 per call), and `offset` pages through the rest — the
+`…+N more` line says which offset comes next. Then outline one frame by `id`.
+
 ## 7. The user is a live co-editor
 
 Edit ops can come back `skipped — edited by the user (at <id>)`. That is not a
@@ -96,7 +100,7 @@ retry — the user needs edit access.
 | Build something new | `insert_html` (→ `fountible-build-ui`) |
 | A vector shape / icon / graphic | `insert_shape`, `insert_icon`, `insert_svg` |
 | Change something that exists | `edit_nodes` (→ `fountible-edit-design`) |
-| Colors and spacing as tokens | `list_variables_and_fonts`, `create_variable` |
+| Colors, spacing and fonts as tokens | `list_variables_and_fonts`, `create_variable`, `edit_variable` (→ `fountible-tokens`) |
 | Make a repeated part one component, or reuse one from this file | `create_component`, `list_components`, `insert_component` (→ `fountible-edit-design`) |
 | A token or component from a team library | `list_library_assets`, then `use_library_variable` / `insert_library_component` (→ `fountible-tokens`) |
 | Motion | `set_animation`, `set_timeline`, `follow_path` (→ `fountible-motion`) |

@@ -1,6 +1,6 @@
 ---
 name: fountible-tokens
-description: "Fountible design tokens: list existing variables and fonts, create colour / number / radius / opacity tokens, and use the Tailwind utilities they mint."
+description: "Fountible design tokens: list existing variables and fonts, create colour / number / radius / opacity / font tokens, change, rename or delete them, and use the Tailwind utilities they mint."
 when_to_use: "TRIGGER on 'set up a theme', 'use our brand colours', 'make this a token', 'what colours does this file use', 'apply the design system', or any restyle where a raw hex would otherwise be hardcoded."
 ---
 
@@ -19,12 +19,19 @@ A variable's slug becomes a utility suffix:
 | Type | Renders as | Utilities you get |
 | --- | --- | --- |
 | `color` | `var(--color-<slug>)` | `bg-<slug>`, `text-<slug>`, `border-<slug>` |
-| `number` | a length | `p-<slug>`, `w-<slug>`, `gap-<slug>` |
+| `number` | a length | `p-<slug>`, `w-<slug>`, `gap-<slug>`; as type: `text-<slug>` (size), `leading-<slug>`, `tracking-<slug>` |
 | `radius` | a radius | `rounded-<slug>` |
 | `opacity` | 0–1 | `opacity-<slug>` |
+| `font` | a font-family list | `font-<slug>` |
 
 So a `brand` colour variable is used as `bg-brand`, not `bg-[var(--color-brand)]`
 and certainly not `bg-[#0ea5e9]`.
+
+**The slug is not always the name.** A name that is a number or a built-in
+Tailwind key gets a `-2` suffix, because the plain form would rebind the
+built-in: a number variable named `8` is `gap-8-2` (`gap-8` stays 32px), and a
+colour named `primary` is `bg-primary-2`. The tool reply and
+`list_variables_and_fonts` give the real slug — write that one.
 
 ## Creating one
 
@@ -34,6 +41,8 @@ and certainly not `bg-[#0ea5e9]`.
 - `number` → integer px
 - `radius` → integer px
 - `opacity` → decimal 0–1
+- `font` → a CSS font-family list, e.g. `"Inter", ui-sans-serif, sans-serif`
+  (a generic fallback is added when the list has none)
 
 Create the variable *before* the restyle that uses it, so the very first write
 already references the token.
@@ -41,6 +50,28 @@ already references the token.
 Good reasons to create one: the user names a brand colour; the same literal
 appears in three or more places; the user says "our blue" / "the card radius".
 Not a good reason: a one-off value used once.
+
+## Changing, renaming, deleting
+
+`edit_variable` `{variable, value?, name?, delete?}` — `variable` is the slug
+(or id, or exact name). It works on the whole file at once, like the
+Variables panel, and is one undo step:
+
+- `value` changes the token; every layer using it updates.
+- `name` renames it. The slug follows the new name and every class, text run,
+  variant and instance override that spelled the old slug is rewritten, so
+  nothing changes on screen. Write the new slug from the reply afterwards.
+- `delete: true` removes it. Each use becomes the literal value it had
+  (`p-gutter` → `p-6`), so nothing changes on screen either.
+
+A token linked from a team library follows the library: it can be deleted
+here, but its value and name change in the library file.
+
+## Big files
+
+`list_variables_and_fonts` lists 120 variables per call. Narrow it with
+`query` (matches name or slug) and `type`, or page with `offset` — the
+`… +N more` line gives the next one.
 
 ## Team libraries
 
@@ -73,10 +104,14 @@ picks up the library's updates. Components made in this file are separate:
 
 ## Fonts
 
-`list_variables_and_fonts` also reports the document's fonts. They can be read
-and used in class strings but **cannot be created over MCP** — the user adds
-fonts in the Fountible UI. If a design needs a font that isn't there, say so
-rather than silently substituting.
+`list_variables_and_fonts` also reports the document's uploaded fonts. They
+can be read and used in class strings but **cannot be uploaded over MCP** — the
+user adds font files in the Fountible UI. If a design needs a font that isn't
+there, say so rather than silently substituting.
+
+A `font` **variable** is different: it names a family list, so retyping every
+layer that uses `font-<slug>` is one `edit_variable` value change instead of a
+find-and-replace across the file.
 
 ## Why this pays off later
 

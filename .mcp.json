@@ -31,6 +31,7 @@
           "edit_nodes": "Edit layers",
           "edit_code_layer": "Edit code layer",
           "create_variable": "Create variable",
+          "edit_variable": "Edit variable",
           "use_library_variable": "Link a library token",
           "select_nodes": "Select layers",
           "remove_background": "Remove image background",
