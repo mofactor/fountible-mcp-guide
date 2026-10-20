@@ -102,6 +102,7 @@ retry — the user needs edit access.
 | Change something that exists | `edit_nodes` (→ `fountible-edit-design`) |
 | Colors, spacing and fonts as tokens | `list_variables_and_fonts`, `create_variable`, `edit_variable` (→ `fountible-tokens`) |
 | Make a repeated part one component, or reuse one from this file | `create_component`, `list_components`, `insert_component` (→ `fountible-edit-design`) |
+| Versions of one part (a logo on light and dark, mark only) | ONE component with variants: `add_variants`; `insert_component` takes `variant`, `set_variant` switches one (→ `fountible-edit-design`) |
 | A token or component from a team library | `list_library_assets`, then `use_library_variable` / `insert_library_component` (→ `fountible-tokens`) |
 | Motion | `set_animation`, `set_timeline`, `follow_path` (→ `fountible-motion`) |
 | Pull in a real web page | `import_url` (→ `fountible-import`) |

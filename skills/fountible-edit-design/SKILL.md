@@ -134,8 +134,48 @@ them. `name` names the component.
   `make_interactive`. A part of a main that already has instances can't
   become a component (those instances would lose their own changes).
 - **Reuse.** `list_components` lists this file's components (id, name, main,
-  size, instance count). `insert_component` places a linked instance by id or
-  name, inside `parentId` (at `index`) or at `x`/`y`. A team library's
+  size, instance count, variants). `insert_component` places a linked instance
+  by id or name, inside `parentId` (at `index`) or at `x`/`y`, and `variant`
+  places it at one of the component's values (below). A team library's
   components go through `insert_library_component` instead (→ `fountible-tokens`).
 - `read_canvas_outline` marks an instance root `of "<name>"` and a main
   `[main of "<name>"]`.
+
+## Versions of one part: `add_variants`
+
+Versions of ONE part (a logo on light and on dark, mark only, wordmark; a
+button's sizes or states) are ONE component with variants, never a separate
+component per version. Alternative designs to choose between (three hero
+options) stay separate frames.
+
+Build the base once with every layer any version needs, `create_component` it,
+then call `add_variants` `{component, values}` with all the value names in
+order, e.g. `["On light", "On dark", "Mark only", "Wordmark"]`. For a new
+property the first value is the default: what the main shows now. `property`
+names the property (default: its only variant property, else a new `Variant`;
+a name it doesn't have yet adds that property, such as `Size`), and `rename`
+takes `[{from, to}]` pairs for values it already has. Names it already has are
+kept, so calling it again with them just lists the previews. One undo step.
+
+- **Style a value through its preview.** Every value but the default gets a
+  preview beside the main on the component's canvas, and the reply lists each
+  preview's id and its layers' ids. `edit_nodes` on a preview or its layers
+  (`set_classes`, `set_style`, `set_prop` fills and strokes, `set_text`)
+  changes that value for every instance showing it. The preview's own classes
+  set the value's size, background and radius.
+- **Shared layers.** All values share the main's layers. `delete` or
+  `set_visible` false on a layer inside a preview hides it in that value only
+  (in an instance, `delete` is skipped). A layer only some values show goes in
+  the main, hidden in the other previews. Editing the main changes every value.
+- **Place and switch.** `insert_component` with `variant` places an instance at
+  a value: `"Mark only"`, or `"Variant=On dark, Size=Large"` when the component
+  has several properties (a boolean takes On or Off). `set_variant`
+  `{ids, variant}` switches instances already placed. Each keeps its own
+  overrides, and one placed on the canvas takes that value's size unless it
+  was resized by hand. Previews, mains, plain layers and instances nested in
+  another instance are skipped, with the reason.
+- **Find them later.** `list_components` prints each property's values, its
+  default, and the preview id for every other value. `read_canvas_outline`
+  marks the value an instance shows (`[Variant=On dark]`) and a preview
+  (`[preview of Variant=On dark]`). A preview is not one more copy: editing it
+  restyles that value everywhere.

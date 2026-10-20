@@ -52,7 +52,8 @@ properties. Reach for those for depth rather than skewing artwork by hand.
 | A primitive (rect, ellipse, polygon, star) | `insert_shape` | Stays parametric and re-editable |
 | Procedural texture | `insert_shader` | Mesh gradients, grain, voronoi, halftone, liquid metal, ASCII |
 | A part that repeats (cards, pricing tiers, list rows) | Build them, then `create_component` | One main and linked copies, each keeping its own text and images (→ `fountible-edit-design`) |
-| A component this file already has | `list_components`, then `insert_component` | A linked instance instead of a hand-built lookalike |
+| Versions of one part (a logo on light and dark, mark only; a button's sizes) | Build the base once, `create_component`, then `add_variants` | ONE component with a value per version, never a component each (→ `fountible-edit-design`) |
+| A component this file already has | `list_components`, then `insert_component` | A linked instance instead of a hand-built lookalike; `variant` places it at one of its values |
 | A photo | `search_stock_images` | Put the returned URL straight into an `<img src>` in your next `insert_html` — cheaper than a separate insert |
 
 A shader layer is an ordinary frame afterwards: resize it, stack things on it,
