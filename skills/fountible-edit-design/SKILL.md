@@ -42,7 +42,8 @@ when you actually hit it.
 - `set_shader_params` — merges validated shader knobs.
 - `set_video` — merges a video layer's playback settings: `startAt` (ms into
   its film before it plays), `loop`, `muted`, `volume`, `autoplay`,
-  `controls`. Never the clip itself.
+  `controls`. Never the clip itself. A button that plays or pauses it is
+  `make_interactive` with `video` (below).
 
 **Images**
 - `remove_image_fill` removes real image entries while preserving other fills.
@@ -102,6 +103,17 @@ active panel visible, the active trigger styled differently — then call
 For everything but hover, the frame becomes a component and a linked instance
 with a **new id** takes its place: use the returned id afterwards. A refusal
 says what to restructure.
+
+**A layer that controls a video.** "Make this button play the video",
+"restart the video when I click the logo": call `make_interactive` with that
+layer as `nodeId` and `video: {id, action, trigger?}` — `id` is the video
+layer, `action` is `play`, `pause`, `toggle` (play/pause) or `restart`, and
+`trigger` is `click` (default) or `hover` (acts while hovered, put back on
+leave). Both layers must be on the same frame. Nothing is converted or moved,
+and the frame's animations keep running alongside. `play` and `toggle` make a
+clip that starts by itself wait for the layer instead (the reply says so;
+`set_video` `autoplay: "enter"` undoes it). Calling again for the same layer,
+video and trigger replaces the link; `action: "none"` removes it.
 
 ## Reusable parts: `create_component`
 

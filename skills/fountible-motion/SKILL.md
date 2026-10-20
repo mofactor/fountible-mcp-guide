@@ -101,6 +101,12 @@ frame instead of sitting on its last; add `muted: true` when the timeline's
 music should carry the film. `set_video` also takes `loop`, `volume` (0–1),
 `autoplay` and `controls`, never the clip itself.
 
+**In Preview and while presenting**, a layer can play, pause, toggle or
+restart a video on its frame while the frame's animations run on:
+`make_interactive` with that layer as `nodeId` and
+`video: {id, action, trigger?}` (see `fountible-edit-design`). R restarts the
+animations and the clips together.
+
 For a squash pivot, set an `origin-[50%_100%]` class on the layer *first* —
 width/height keyframes resize about the transform origin.
 
