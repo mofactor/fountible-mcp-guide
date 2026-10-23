@@ -69,6 +69,13 @@ when you actually hit it.
   vectors that form one mark, an icon and its badge, shapes that move as one).
   It takes `ids`, not `id`, and the reply gives the new Group's id. Send it in a
   call that does not also edit those layers.
+- `section` `{ids, name?}` — wraps top-level layers in a new canvas Section
+  (Figma's labeled region for organizing frames), in place, with a 40px margin.
+  The layers must all be on the page or all in one section; sections never
+  nest, so layers taken out of a section land in a new one beside it. It takes
+  `ids`, and the reply gives the new Section's id and box. Send it in a call
+  that does not also edit those layers. A Section is canvas chrome: never use
+  one inside a design.
 - `ungroup` `{id}` — ⌘⇧G: releases a group's or frame's layers in place and
   removes the container (a frame's own fill and border go with it).
 - `delete`
