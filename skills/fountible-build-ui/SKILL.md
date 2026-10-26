@@ -39,7 +39,11 @@ of faking them with stacked divs. The user can then edit the points.
 
 Real CSS 3D (`transform-[perspective(...)_rotateX(...)]` with `transform-3d` on
 a wrapper), gradients, shadows, blur, and blend modes all survive as editable
-properties. Reach for those for depth rather than skewing artwork by hand.
+properties. Reach for those for depth rather than skewing artwork by hand. A
+block with real thickness (an isometric slab, plate or card) takes
+`data-thickness="10"`: its wall shades under the face and the face lifts 10 px
+onto its parent. `data-thickness-wall="#hex"` picks the wall's color (otherwise
+the face's own). Never build the walls by hand.
 
 ## Choosing among the insert tools
 

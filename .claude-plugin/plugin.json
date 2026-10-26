@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "fountible",
   "displayName": "Fountible",
-  "version": "0.2.0+1227051b1b5d",
+  "version": "0.2.0+ed96b69fc0c2",
   "description": "Design and edit on the Fountible canvas from your editor. Read open design files as Tailwind JSX, build screens from HTML, edit layers, author keyframe and motion-path animation, and implement a design in your codebase — every change lands live, attributed like a collaborator's, and undoes as one step.",
   "author": {
     "name": "Fountible",

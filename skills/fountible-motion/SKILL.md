@@ -6,21 +6,29 @@ when_to_use: "TRIGGER on 'animate', 'add motion', 'make it fade / slide / bounce
 
 # Motion
 
-Three layers. Pick the lowest one that does the job.
+Pick the simplest tool that does the job.
 
 ```
 A preset?                → set_animation
 Precise keyframes?       → set_timeline
 Travelling along a curve? → follow_path   (letters bending along it? → text_on_path)
+Weight and physics?      → bake_motion   (when it is in your tools)
 ```
 
 ## 1. `set_animation` — presets
 
 Categories: **Enter** (fade-in, slide-in, scale-in, blur-in, rotate-in,
 flip-in), **Text** (letters-fade-in, letters-rise, mask-reveal, words-fade-in,
-letters-flip, letters-scale, letters-wave), **Emphasis** (grow, shrink,
-wiggle), **Loop** (spin, pulse, float). Triggers: `load`, `inView`, `hover`,
-`press`, `loop`.
+letters-flip, letters-scale, letters-wave, letters-glow), **Emphasis** (grow,
+shrink, wiggle), **Loop** (spin, pulse, float). Triggers: `load`, `inView`,
+`hover`, `press`, `loop`.
+
+`params` sets a preset's own knobs (the tool's schema lists them per preset).
+**letters-glow** is per-letter color: each letter lights up in `params.color`
+(hex, default Fountible orange) with a `params.glow` px glow and cools back to
+the text's own color, one after another by the stagger. `params.fade: true`
+makes each letter appear as it lights, so a delay and stagger matched to the
+typing give hot type.
 
 **Per-letter motion:** apply the effect to the **text layer** and pass
 `split: {by: "chars" | "words"}` with a `stagger`. The split happens only
@@ -178,6 +186,82 @@ change before it lands: an error names the line, so fix it with
 `edit_code_layer` find/replace edits instead of resending the whole code. Put
 it inside a film's frame and it draws the timeline's time. The tools appear
 only for people code layers are switched on for.
+
+## Motion from code — `bake_motion` (when it is in your tools)
+
+For motion with weight that hand-set keys get wrong: a drop that lands and
+bounces with squash and stretch, a press that springs back, a knock-out chain,
+a swing, gears in mesh, a wind-up and release, a settle with overshoot. Write
+`pose(t, info)`, where each layer is at time `t` in seconds, and Fountible
+samples it (60 times a second by default) and bakes it into the frame's
+timeline clip as the fewest eased keys that stay within half a pixel. The keys
+play, scrub and export like hand-set ones; no code runs at playback.
+
+```js
+function pose(t) {
+  const y = spring(t - 0.3, { from: -260, to: 0, stiffness: 220, damping: 20 });
+  return { Card: { y, rotate: (y / -260) * 6 }, Shadow: { scale: 1 + y / 520 } };
+}
+```
+
+- Name layers by id or unique name, and return the same layers and channels
+  at every `t`, in `set_timeline`'s units: `x` / `y` px offsets, `rotate` deg,
+  `scale` multipliers, `opacity` 0–1, plus `scaleX` / `scaleY`,
+  `rotateX` / `rotateY` / `rotateZ`, `width` / `height`.
+- Helpers: `spring(t, { from, to, stiffness, damping, mass, velocity })`,
+  `ease(name, x)` with `set_timeline`'s ease names, `progress(t, start, end)`,
+  and the seeded `random()` / `noise()`. For real physics, step it in
+  `setup(info)` and let `pose` read the result.
+- One bake per clip. The code is kept on the clip: change the motion with
+  `edits` on that code (`read_node` the frame shows it). Keys edited by hand
+  on a baked track are overwritten by the next bake; tracks set by hand on
+  other layers stay as they are.
+
+## Isometric and 3D scenes (only when asked for one)
+
+- **Camera:** one stage wrapper with `transform-3d` and the isometric ground
+  plane, `transform-[rotateX(54.74deg)_rotateY(0deg)_rotateZ(45deg)]`, with no
+  `perspective(…)`: isometric is an orthographic camera. Every wrapper between
+  it and the objects keeps `transform-3d`. Lay things out in the plane's own
+  px, and `x` / `y` keys move a layer along the plate's axes.
+- **What flattens it:** opacity below 1, a filter or blur, `overflow-hidden` or
+  a mask on a parent squashes everything inside it into one flat sheet. Fade,
+  blur or clip the faces and leaves, never a parent that holds 3D.
+- **Depth:** give every slab, card and box real thickness with
+  `data-thickness="10"` on the element (the Thickness effect: a shaded wall
+  under its face, a soft contact shadow, and the face lifted 10 px so it rests
+  on its parent). Round its corners (`rounded-[14px]` and up); the wall
+  follows them. `data-thickness-finish="glass"` or `"key"` changes the wall,
+  and `data-thickness-wall="#hex"` (or a palette name like `stone-300`) its
+  color; without it the wall is the face's own color, shaded darker.
+  Never stack slices or build side walls by hand. A thick layer can't clip
+  its content, fade, blur or mask itself: put those on a child. Keep other
+  stacked planes at least 1 px apart in z or they flicker. A stroke lying in
+  the plane draws at about half width: draw 2 px to show 1 px.
+- **Labels:** billboards, inside the plane and counter-rotated with
+  `transform-[rotateZ(-45deg)_rotateX(-54.74deg)]` so they face the screen.
+  Never work out screen positions by hand.
+- **Story:** one bold central object, 3–5 acts that each read at a glance, a
+  beat of stillness (0.5–1 s) after each, and motion with weight: drops land
+  with a little squash, hinges swing, springs overshoot and settle.
+- **A cursor in the scene** moves at a human pace (no hop shorter than about
+  0.6 s), arcs instead of sliding straight, presses with a small dip, and
+  causes each act instead of waiting in a corner.
+- Stay under about 600 layers.
+
+## Before you call a film done
+
+Look at it with `screenshot_node` (`frames` for a contact sheet, `from` / `to`
+for a close strip), then check:
+
+- A film that loops ends on exactly its first frame: look at both.
+- The main subject fills the frame and stays whole: no big empty area, no crop
+  through it.
+- Nothing is cut off by the frame edge, passes through another object or
+  strays into the frame.
+- No placeholder boxes, empty cards or greyed-out stand-ins are left.
+- Type reads at the frame's real size: at least about 1/40 of the frame's
+  height, more on a tilted surface.
 
 ## Afterwards
 
