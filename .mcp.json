@@ -42,6 +42,7 @@
           "create_component": "Create component",
           "add_variants": "Add component variants",
           "set_variant": "Switch component variant",
+          "set_variant_switches": "Set variant switches",
           "set_animation": "Set animation preset",
           "set_timeline": "Set keyframe timeline",
           "follow_path": "Animate along a path",

@@ -52,7 +52,7 @@ enabled — so regenerating the token in Settings never breaks this plugin.
 
 **Edit** — `edit_nodes`, `create_variable`, `edit_variable`, `select_nodes`,
 `remove_background`, `make_interactive`, `create_component`, `add_variants`,
-`set_variant`
+`set_variant`, `set_variant_switches`
 
 **Motion** — `set_animation`, `set_timeline`, `follow_path`, `text_on_path`
 

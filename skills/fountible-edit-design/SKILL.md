@@ -198,3 +198,26 @@ kept, so calling it again with them just lists the previews. One undo step.
   marks the value an instance shows (`[Variant=On dark]`) and a preview
   (`[preview of Variant=On dark]`). A preview is not one more copy: editing it
   restyles that value everywhere.
+
+## Making the states play: `set_variant_switches`
+
+A button's Hover and Pressed looks, a card that lifts on hover, a chip that
+turns on when clicked: once the values exist (`add_variants`), wire them with
+`set_variant_switches` `{nodeId, add, update, remove}` on the component's main,
+its root for the whole component or a layer inside it. Each switch in `add`
+takes a `trigger` (`hover` and `press` go back when the pointer leaves or lets
+go, `click` stays), `changeTo` (a value name, or `"State=Hover"` when the
+component has several properties) and an optional `transition`:
+`{type: "spring", time, bounce}` (default 0.3 s and 0.2),
+`{type: "ease", duration, curve}`, or `{type: "auto"}` for the pattern's own
+timing. One undo step.
+
+- **Change and remove by id.** `update` takes `[{id, ...}]` and changes only
+  the fields given; `remove` takes ids. A call with only `nodeId` lists a
+  layer's switches and their ids, and so does `read_node`.
+- **On the main.** A switch works in every state, so a preview's layer edits
+  its main. An instance's layer is refused: pass its main's layer instead.
+- **Where they show.** They play in Preview and while presenting, and the
+  canvas draws each as an arrow from the main to its value's preview. Tabs,
+  an accordion, a dropdown or a toggle drawn as one frame still go to
+  `make_interactive`.
