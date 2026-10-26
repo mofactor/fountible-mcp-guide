@@ -76,6 +76,11 @@ when you actually hit it.
   `ids`, and the reply gives the new Section's id and box. Send it in a call
   that does not also edit those layers. A Section is canvas chrome: never use
   one inside a design.
+- `resize` `{id, x?, y?, w?, h?}` — sets a Section's edges, like dragging them.
+  The layers in it stay where they are on the canvas (their in-section x/y
+  change), so pushing every edge out by N (`x-N`, `y-N`, `w+2N`, `h+2N`) gives
+  them N more room on every side. A Section never grows on its own, and it takes
+  no classes: `set_style`/`set_classes` on one are refused.
 - `ungroup` `{id}` — ⌘⇧G: releases a group's or frame's layers in place and
   removes the container (a frame's own fill and border go with it).
 - `delete`
