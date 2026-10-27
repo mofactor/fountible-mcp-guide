@@ -211,8 +211,10 @@ turns on when clicked: once the values exist (`add_variants`), wire them with
 `set_variant_switches` `{nodeId, add, update, remove}` on the component's main,
 its root for the whole component or a layer inside it. Each switch in `add`
 takes a `trigger` (`hover` and `press` go back when the pointer leaves or lets
-go, `click` stays), `changeTo` (a value name, or `"State=Hover"` when the
-component has several properties) and an optional `transition`:
+go; a second `click` goes back to the value the main shows, and `clickAgain`
+names another value or `"nothing"` to stay), `changeTo` (a value name, or
+`"State=Hover"` when the component has several properties) and an optional
+`transition`:
 `{type: "spring", time, bounce}` (default 0.3 s and 0.2),
 `{type: "ease", duration, curve}`, or `{type: "auto"}` for the pattern's own
 timing. One undo step.
