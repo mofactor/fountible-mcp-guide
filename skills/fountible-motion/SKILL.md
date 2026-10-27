@@ -252,7 +252,10 @@ function pose(t) {
 ## Before you call a film done
 
 Look at it with `screenshot_node` (`frames` for a contact sheet, `from` / `to`
-for a close strip), then check:
+for a close strip) on the film's top-level frame. Its reply also measures each
+moment and lists any layer cut by the frame edge, outside the frame, or text
+cut off by its container: fix those unless the cut is a deliberate bleed,
+entrance or exit. Then check:
 
 - A film that loops ends on exactly its first frame: look at both.
 - The main subject fills the frame and stays whole: no big empty area, no crop
