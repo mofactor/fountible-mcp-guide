@@ -33,6 +33,7 @@
           "insert_component": "Insert component",
           "edit_nodes": "Edit layers",
           "edit_code_layer": "Edit code layer",
+          "try_code_input": "Try code layer input",
           "create_variable": "Create variable",
           "edit_variable": "Edit variable",
           "use_library_variable": "Link a library token",

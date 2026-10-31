@@ -44,8 +44,8 @@ destructive.
 
 ## 2. `set_timeline` — declarative keyframes
 
-On a **top-level frame only**. It replaces the same-named clip's tracks, so
-re-running it is an update, not an append.
+On a **top-level frame, stack or grid only**. It replaces the same-named clip's
+tracks, so re-running it is an update, not an append.
 
 **To fix or tweak part of an existing clip**, pass `merge: true` with ONLY the
 tracks you change (plus `removeTracks: [{nodeId, channel}]`): every other track,
@@ -116,10 +116,25 @@ restart a video on its frame while the frame's animations run on:
 animations and the clips together.
 
 For a squash pivot, set an `origin-[50%_100%]` class on the layer *first* —
-width/height keyframes resize about the transform origin.
+width/height keyframes resize about the transform origin. A flex or grid child
+with no origin of its own grows where its layout puts it and pushes its
+siblings.
 
 A component instance plays the **main component's** timeline. Author it there,
 not on the instance.
+
+Build motion like Flash movie clips. A self-contained piece of motion (a logo
+sting, a lower third, a whole roll) is one animated component with its own
+timeline, even when it runs only once, and clips nest. Key it once on the main,
+then start each instance from the clip around it with `instances`:
+`merge: true, instances: [{ nodeId, at }]`, where `at` is ms from the clip's
+start. A main's own timeline can start the instances inside it.
+
+Key the layers inside the main, not its root: a property the film keys on an
+instance replaces the clip's own keys for it. An instance starts once and does
+not loop. It holds its first pose before its start and its last pose once its
+timeline ends, and the clip grows to fit. Sounds on the main's clip play with
+each instance.
 
 ## 3. `follow_path` — travel along a curve
 
@@ -184,8 +199,10 @@ same moment always paints the same picture and a film exports exactly as it
 previews. It runs in a sandbox with no network, and Fountible runs every
 change before it lands: an error names the line, so fix it with
 `edit_code_layer` find/replace edits instead of resending the whole code. Put
-it inside a film's frame and it draws the timeline's time. The tools appear
-only for people code layers are switched on for.
+it inside a film's frame and it draws the timeline's time. With
+`interactive: true`, viewers can drive it in Preview and shared links through
+`onInput`; press its controls with `try_code_input` before calling it done. The
+tools appear only for people code layers are switched on for.
 
 ## Motion from code — `bake_motion` (when it is in your tools)
 
