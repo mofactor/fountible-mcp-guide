@@ -201,8 +201,16 @@ change before it lands: an error names the line, so fix it with
 `edit_code_layer` find/replace edits instead of resending the whole code. Put
 it inside a film's frame and it draws the timeline's time. With
 `interactive: true`, viewers can drive it in Preview and shared links through
-`onInput`; press its controls with `try_code_input` before calling it done. The
-tools appear only for people code layers are switched on for.
+`onInput`; press its controls with `try_code_input` before calling it done.
+
+Real footage and photos go inside a code layer through `media`: name a video or
+image layer in the file with `{ name: "clip", nodeId }` and the code gets it as
+`info.media.clip`, or on `engine: "three"` as a texture at `three.media.clip`
+that stays on the right frame by itself. `startAt`, `trimStart`, `duration` and
+`loop` choose the frames, so a film exports exactly. The code layer keeps the
+file, so a layer placed only for this can be deleted. Clips play silent.
+
+The tools appear only for people code layers are switched on for.
 
 ## Motion from code — `bake_motion` (when it is in your tools)
 
