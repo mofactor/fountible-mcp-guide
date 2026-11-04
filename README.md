@@ -36,6 +36,9 @@ listening on your laptop's `127.0.0.1`.
 { "mcpServers": { "fountible": { "command": "npx", "args": ["-y", "fountible-mcp"] } } }
 ```
 
+The Claude Code plugin ships that same server in its own `server/` folder and
+runs it with Node (18.17 or newer), so installing it downloads nothing else.
+
 There is no token to configure. The shim reads the endpoint from
 `~/.fountible/connector.json`, which the app maintains while connectors are
 enabled — so regenerating the token in Settings never breaks this plugin.
@@ -91,13 +94,16 @@ connect is the third party** — when you use this with Claude, your design
 content goes to Anthropic under your agreement with them; Fountible neither
 routes nor stores it.
 
-Three tools do reach the network through Fountible or a provider, and are
+Four tools do reach the network through Fountible or a provider, and are
 called out in the `fountible-import` skill: `import_url` (fetched via
-Fountible's proxy), the stock-image tools, and `remove_background`.
+Fountible's proxy), the stock-image tools, `remove_background`, and
+`make_interactive` (a compact outline of the selected frame goes through
+Fountible's backend to a pattern classifier; offline it decides locally).
 
-The bundled MCP server (`fountible-mcp`) reads exactly one file outside this
-plugin's directory: `~/.fountible/connector.json`, the endpoint descriptor the
-Fountible app writes.
+The bundled MCP server (`server/`, the same code as the `fountible-mcp` npm
+package) reads exactly one file outside this plugin's directory:
+`~/.fountible/connector.json`, the endpoint descriptor the Fountible app
+writes.
 
 ## Support
 

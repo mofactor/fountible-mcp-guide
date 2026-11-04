@@ -15,5 +15,5 @@
     "motion"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json"
+  "mcpServers": "./.cursor-plugin/mcp.json"
 }

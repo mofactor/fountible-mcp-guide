@@ -1,0 +1,58 @@
+{
+  "mcpServers": {
+    "fountible": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "fountible-mcp@0.2.0"
+      ],
+      "_meta": {
+        "ideToolIconPath": "./assets/fountible-icon-mono.svg",
+        "ideToolIconRendersAsTemplate": true,
+        "ideToolTitles": {
+          "list_open_files": "List open Fountible files",
+          "read_canvas_outline": "Read canvas outline",
+          "read_node": "Read layer",
+          "read_selection": "Read selection",
+          "list_variables_and_fonts": "List variables and fonts",
+          "list_library_assets": "Search team libraries",
+          "list_components": "List components",
+          "screenshot_node": "Screenshot layer",
+          "search_icons": "Search icons",
+          "insert_html": "Insert HTML",
+          "insert_svg": "Insert SVG",
+          "insert_shape": "Insert shape",
+          "insert_icon": "Insert icon",
+          "insert_shader": "Insert shader layer",
+          "insert_code_layer": "Insert code layer",
+          "insert_attachment": "Insert attachment",
+          "import_url": "Import a web page",
+          "search_stock_images": "Search stock photos",
+          "insert_stock_image": "Insert stock photo",
+          "insert_library_component": "Insert library component",
+          "insert_component": "Insert component",
+          "edit_nodes": "Edit layers",
+          "edit_code_layer": "Edit code layer",
+          "try_code_input": "Try code layer input",
+          "create_variable": "Create variable",
+          "edit_variable": "Edit variable",
+          "use_library_variable": "Link a library token",
+          "select_nodes": "Select layers",
+          "remove_background": "Remove image background",
+          "make_interactive": "Make layers interactive",
+          "create_component": "Create component",
+          "add_variants": "Add component variants",
+          "set_variant": "Switch component variant",
+          "set_variant_switches": "Set variant switches",
+          "set_animation": "Set animation preset",
+          "set_timeline": "Set keyframe timeline",
+          "bake_motion": "Bake motion from code",
+          "follow_path": "Animate along a path",
+          "text_on_path": "Set text on a path",
+          "add_timeline_audio": "Add sound to a timeline",
+          "make_format_copy": "Make copies in other shapes"
+        }
+      }
+    }
+  }
+}
