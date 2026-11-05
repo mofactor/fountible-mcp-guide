@@ -70,19 +70,21 @@ when you actually hit it.
   It takes `ids`, not `id`, and the reply gives the new Group's id. Send it in a
   call that does not also edit those layers.
 - `section` `{ids, name?}` — wraps top-level layers in a new canvas Section
-  (Figma's labeled region for organizing frames), in place, with a 40px margin.
+  (Figma's labeled region for organizing frames), in place, with a 120px margin.
   The layers must all be on the page or all in one section; sections never
   nest, so layers taken out of a section land in a new one beside it. It takes
   `ids`, and the reply gives the new Section's id and box. Send it in a call
   that does not also edit those layers. A Section is canvas chrome: never use
-  one inside a design.
+  one inside a design. By default keep its edges at least as roomy as the gaps
+  between its layers: when they sit farther apart than 120px, push the edges
+  out to about that gap with `resize`, unless the user wants a snugger fit.
 - `resize` `{id, x?, y?, w?, h?}` — sets a Section's edges, like dragging them.
   The layers in it stay where they are on the canvas (their in-section x/y
   change), so pushing every edge out by N (`x-N`, `y-N`, `w+2N`, `h+2N`) gives
   them N more room on every side. A Section never grows on its own, and it takes
   no classes: `set_style`/`set_classes` on one are refused.
-- `ungroup` `{id}` — ⌘⇧G: releases a group's or frame's layers in place and
-  removes the container (a frame's own fill and border go with it).
+- `ungroup` `{id}` — ⌘⇧G: releases a group's, frame's or Section's layers in
+  place and removes the container (a frame's own fill and border go with it).
 - `delete`
 
 To arrange frames in a row or grid, work out each `x`/`y` from the sizes in the
