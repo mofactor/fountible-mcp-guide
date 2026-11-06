@@ -130,6 +130,16 @@ then start each instance from the clip around it with `instances`:
 `merge: true, instances: [{ nodeId, at }]`, where `at` is ms from the clip's
 start. A main's own timeline can start the instances inside it.
 
+Plan the film in film time, but key each roll in its own time: its main's
+timeline covers its part only, from `0` = the moment it comes in, and its
+instance starts where the part begins. A scene that plays from 10.33 s to
+21.33 s is an 11 s timeline on its main with `at: 10330` in the film. Never give
+every roll the film's whole length, start them all at `0` and hide each outside
+its part with opacity keys inside its main: the dock then shows every roll as a
+bar across the whole film, and moving a scene means re-keying inside its main
+instead of changing one start. `set_timeline` warns about rolls stacked like
+that ("Stacked rolls").
+
 Key the layers inside the main, not its root: a property the film keys on an
 instance replaces the clip's own keys for it. An instance starts once and does
 not loop. It holds its first pose before its start and its last pose once its
