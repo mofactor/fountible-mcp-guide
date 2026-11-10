@@ -20,8 +20,21 @@ Weight and physics?      → bake_motion   (when it is in your tools)
 Categories: **Enter** (fade-in, slide-in, scale-in, blur-in, rotate-in,
 flip-in), **Text** (letters-fade-in, letters-rise, mask-reveal, words-fade-in,
 letters-flip, letters-scale, letters-wave, letters-glow), **Emphasis** (grow,
-shrink, wiggle), **Loop** (spin, pulse, float). Triggers: `load`, `inView`,
-`hover`, `press`, `loop`.
+shrink, wiggle), **Loop** (spin, pulse, float), **Scroll** (parallax).
+Triggers: `load`, `inView`, `hover`, `press`, `loop`, `scroll`.
+
+`scroll` ("While scrolling") has no clock: the effect follows the layer as it
+crosses the screen and plays backward when the page is scrolled back up, so
+`duration`, `delay` and `loop` do not apply to it.
+
+`inView` and `scroll` also take **`offset`** and **`replay`**. `offset` is how
+much more scrolling before the effect starts, as a percentage of the screen's
+height: `0` (the default) starts as soon as the layer shows, `25` a quarter of
+a screen later, a negative number sooner. `replay: true` on `inView` plays the
+effect again every time the layer comes back on screen (default: once);
+`replay: false` on `scroll` plays it through once and leaves it finished
+(default: it rewinds on the way back up). Leave both alone unless the user asks
+for them.
 
 `params` sets a preset's own knobs (the tool's schema lists them per preset).
 **letters-glow** is per-letter color: each letter lights up in `params.color`
