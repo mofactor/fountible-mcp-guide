@@ -37,6 +37,20 @@ flattened image.
 So: draw charts, decorative art, logos, and custom icons as inline SVG instead
 of faking them with stacked divs. The user can then edit the points.
 
+Round a path's corners on its **points**, not with hand-placed bezier handles.
+For a shape built from straight edges with rounded corners (most icons, badges,
+arrows), draw the plain corner points and add `data-corner-radius` to the
+`<path>`, `<polygon>` or `<polyline>`: one number rounds every corner, a list
+gives one value per point in drawing order (`0` = sharp), in the svg's own
+units. Each corner stays one point whose Corner radius the user can change.
+Keep bezier curves for shapes that really curve.
+
+```html
+<svg viewBox="0 0 24 24" class="w-[72px] h-[72px] fill-none stroke-black stroke-2">
+  <path d="M 4 3 L 10 3 L 12 16 L 21 15 L 21 21 L 6 21 Z" data-corner-radius="3 3 2 3 3 4" />
+</svg>
+```
+
 Real CSS 3D (`transform-[perspective(...)_rotateX(...)]` with `transform-3d` on
 a wrapper), gradients, shadows, blur, and blend modes all survive as editable
 properties. Reach for those for depth rather than skewing artwork by hand. A

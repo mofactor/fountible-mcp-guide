@@ -39,6 +39,12 @@ when you actually hit it.
 - `set_prop` — structured props, including the paint arrays: `fills` (on a text
   node this **is** the glyph paint) and `strokes` (gradient borders and vector
   strokes; solid/linear/radial, paired with width tokens).
+  A key no layer has is refused, so read the reply.
+- `set_point_radius` `{id, radius}` or `{id, radii}` — rounds the corner
+  **points** of a path layer, like the Corner radius field of the point panel.
+  `radius` is one px value for every corner; `radii` is one per point in
+  drawing order (`0` = sharp). `read_node` lists a rounded path's points. A
+  `rounded-*` class does not round a path.
 - `set_shader_params` — merges validated shader knobs.
 - `set_video` — merges a video layer's playback settings: `startAt` (ms into
   its film before it plays), `loop`, `muted`, `volume`, `autoplay`,
