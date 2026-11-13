@@ -135,6 +135,19 @@ clip that starts by itself wait for the layer instead (the reply says so;
 `set_video` `autoplay: "enter"` undoes it). Calling again for the same layer,
 video and trigger replaces the link; `action: "none"` removes it.
 
+**A layer that controls the frame's animation.** "Restart the animation when I
+click this", a Replay or Play/pause button, "this plays silent, with a Restart
+with sound button": call `make_interactive` with that layer as `nodeId` and
+`animation: {action?, sound?, trigger?}` — `action` is `play`, `pause`,
+`toggle` (play/pause) or `restart`, `sound` is `on`, `off` or `toggle` (a mute
+button), and `trigger` is `click` (default) or `hover`. No id is needed: it is
+always the animation of the frame the layer sits on (its timeline and timed
+effects). A click that turns the sound on makes that animation **start silent**
+in Preview and on shared links until then (`startSilent: false` keeps the sound
+on from the start); the timeline and video exports always play the sounds.
+Design the button as a real layer first, then link it. Calling again for the
+same layer and trigger replaces the link; `action: "none"` removes it.
+
 ## Reusable parts: `create_component`
 
 `create_component` turns one container (`nodeId`: a frame, stack or grid; a

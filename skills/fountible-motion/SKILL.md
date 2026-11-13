@@ -128,6 +128,12 @@ restart a video on its frame while the frame's animations run on:
 `video: {id, action, trigger?}` (see `fountible-edit-design`). R restarts the
 animations and the clips together.
 
+A layer can also drive the animation itself: `make_interactive` with
+`animation: {action, sound?}` makes a Replay, Play/pause or mute button, and
+`{action: "restart", sound: "on"}` is the "plays silent, Restart with sound"
+pattern — the film then starts silent in Preview until that click (see
+`fountible-edit-design`).
+
 For a squash pivot, set an `origin-[50%_100%]` class on the layer *first* —
 width/height keyframes resize about the transform origin. A flex or grid child
 with no origin of its own grows where its layout puts it and pushes its
