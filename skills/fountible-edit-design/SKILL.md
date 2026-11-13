@@ -113,6 +113,23 @@ say what you removed.
 - **Introducing a colour you'll reuse?** `create_variable` first, then use the
   utility it mints. See `fountible-tokens`.
 
+## Flattening to a picture: `rasterize_layer`
+
+`rasterize_layer{nodeId}` turns a layer into one picture of itself, in place
+(Figma's Rasterize selection): a frame with everything inside it, text, a
+vector, a shader or a live code layer becomes a plain image layer with the same
+name, spot and place in the layer order, and looks the same. Use it when
+someone wants a still of a live or 3D layer (a file thumbnail, a poster frame)
+or a heavy group made light.
+
+- It is destructive: what was inside stops being editable. One undo brings it
+  back. Use the id the reply gives from then on.
+- The picture is what the layer shows right now, at 2×.
+- It refuses, with the reason, a layer that the timeline, an effect or a motion
+  path moves, a mask or a layer under one, a main component, a slide, a section
+  and a layer inside a component instance.
+- The file has to be the one on screen in Fountible.
+
 ## Making it work: `make_interactive`
 
 Tabs, accordions / FAQs, dropdown menus, toggles / switches and hoverable

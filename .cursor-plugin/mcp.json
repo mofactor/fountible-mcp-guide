@@ -39,6 +39,7 @@
           "use_library_variable": "Link a library token",
           "select_nodes": "Select layers",
           "remove_background": "Remove image background",
+          "rasterize_layer": "Rasterize a layer",
           "make_interactive": "Make layers interactive",
           "create_component": "Create component",
           "add_variants": "Add component variants",
