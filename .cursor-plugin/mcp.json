@@ -22,6 +22,7 @@
           "insert_html": "Insert HTML",
           "insert_svg": "Insert SVG",
           "insert_shape": "Insert shape",
+          "connect_layers": "Connect layers with lines",
           "insert_icon": "Insert icon",
           "insert_shader": "Insert shader layer",
           "insert_code_layer": "Insert code layer",

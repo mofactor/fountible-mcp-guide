@@ -51,7 +51,7 @@ enabled — so regenerating the token in Settings never breaks this plugin.
 
 **Create** — `insert_html`, `insert_svg`, `insert_shape`, `insert_icon`,
 `insert_shader`, `import_url`, `search_stock_images`, `insert_stock_image`,
-`insert_component`
+`insert_component`, `connect_layers`
 
 **Edit** — `edit_nodes`, `create_variable`, `edit_variable`, `select_nodes`,
 `remove_background`, `rasterize_layer`, `make_interactive`, `create_component`,

@@ -68,6 +68,7 @@ the face's own). Never build the walls by hand.
 | Not sure of the icon's name | `search_icons` first | ~1,700 icons; guessing wastes a call |
 | A complete graphic you already have | `insert_svg` | Takes an SVG string |
 | A primitive (rect, ellipse, polygon, star) | `insert_shape` | Stays parametric and re-editable |
+| Lines between layers: a flowchart, user flow, site map, org chart | Build the boxes, then `connect_layers` | Each line stays stuck to both layers when either moves |
 | Procedural texture | `insert_shader` | Mesh gradients, grain, halftone, liquid metal, ASCII |
 | A part that repeats (cards, pricing tiers, list rows) | Build them, then `create_component` | One main and linked copies, each keeping its own text and images (→ `fountible-edit-design`) |
 | Versions of one part (a logo on light and dark, mark only; a button's sizes) | Build the base once, `create_component`, then `add_variants` | ONE component with a value per version, never a component each (→ `fountible-edit-design`) |
@@ -79,6 +80,37 @@ animate it.
 
 Inside `insert_html`, `data-icon="lucide:<name>"` on a sized element resolves
 to a parametric icon layer — cheaper than hand-writing the paths.
+
+## Diagrams: lines that stay stuck, `connect_layers`
+
+A line that joins two layers is a connector, FigJam's kind: build the boxes
+first (`insert_html`, with a `data-layer-name` on each), then join them by the
+ids the insert returned.
+
+```json
+{"connections": [
+  {"from": "<Sign up id>", "to": "<Welcome id>"},
+  {"from": "<Welcome id>", "to": "<Pay id>", "text": "Upgrade", "kind": "curved"}
+]}
+```
+
+- The line runs between the two layers' nearest sides with an arrowhead at
+  `to`, and follows them whenever either one moves or resizes. Never draw
+  those lines as SVG: they come apart the first time a box moves.
+- Per connection: `text` (words on the line; it leaves a gap for them), `kind`
+  (`bent` with rounded corners by default, `straight`, `curved`), `fromSide` /
+  `toSide` (`top`, `right`, `bottom`, `left`, default auto), `arrows` (`end`,
+  `start`, `both`, `none`), `color` (hex), `weight` (px), `dashed`.
+- To change a line, pass its `id` (the outline marks lines as `connector`,
+  with what they join); `text: ""` takes its words off. A pair already joined
+  in the same direction is changed, not drawn twice.
+- A line goes in the nearest frame that holds both layers, else their section,
+  else the page. A diagram drawn inside one frame moves and exports with it.
+- The reply names any layer a line runs across. Move a box, or set a side, to
+  clear it. Delete a line with `edit_nodes` `delete`; deleting a layer deletes
+  the lines stuck to it.
+- Arrows that join nothing (a callout, a decorative swoosh) stay inline SVG
+  with `marker-end`.
 
 ## Finish the job
 

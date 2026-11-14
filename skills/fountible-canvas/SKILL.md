@@ -99,6 +99,7 @@ retry — the user needs edit access.
 | See what's on the canvas | `read_canvas_outline`, then `read_node` |
 | Build something new | `insert_html` (→ `fountible-build-ui`) |
 | A vector shape / icon / graphic | `insert_shape`, `insert_icon`, `insert_svg` |
+| Lines that join layers (a flowchart, user flow, site map, any diagram's arrows) | `connect_layers` (→ `fountible-build-ui`) |
 | Change something that exists | `edit_nodes` (→ `fountible-edit-design`) |
 | Colors, spacing and fonts as tokens | `list_variables_and_fonts`, `create_variable`, `edit_variable` (→ `fountible-tokens`) |
 | Make a repeated part one component, or reuse one from this file | `create_component`, `list_components`, `insert_component` (→ `fountible-edit-design`) |
