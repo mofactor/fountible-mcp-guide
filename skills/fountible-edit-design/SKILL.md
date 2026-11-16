@@ -165,6 +165,16 @@ on from the start); the timeline and video exports always play the sounds.
 Design the button as a real layer first, then link it. Calling again for the
 same layer and trigger replaces the link; `action: "none"` removes it.
 
+**A click that opens another frame** (Figma's "Navigate to"). "A See animated
+button that opens the animated frame", a nav link, Next / Back buttons between
+screens: call `make_interactive` with the button as `nodeId` and
+`goTo: {frameId}` — `frameId` is a top-level frame (or a section) on the same
+page, from the canvas outline. In Preview and on shared links a click on the
+button then shows that frame from its start; the frame the button sits on
+starts over. Nothing is converted or moved. One per layer: calling again
+replaces it, and `frameId: "none"` removes it. `read_node` on the button says
+where it goes. It does not open web pages or other pages of the file.
+
 ## Reusable parts: `create_component`
 
 `create_component` turns one container (`nodeId`: a frame, stack or grid; a
