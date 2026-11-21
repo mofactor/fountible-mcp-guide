@@ -175,6 +175,16 @@ starts over. Nothing is converted or moved. One per layer: calling again
 replaces it, and `frameId: "none"` removes it. `read_node` on the button says
 where it goes. It does not open web pages or other pages of the file.
 
+**Where the prototype begins** (Figma's "flow starting point"). "Start the
+prototype on this frame", "call this flow Checkout": call `make_interactive`
+with the frame as `nodeId` and `flowStart: {name}` (leave `name` out for the
+next free "Flow 1", "Flow 2", …; calling again with a name renames it;
+`{remove: true}` takes it away). It goes on a top-level frame or a frame
+directly in a section, one per frame, never in a slide deck. With nothing
+selected, Preview opens a page on its first flow starting point in reading
+order, and each one can be shared as its own preview link. The canvas outline
+and `read_node` show which frames are one.
+
 ## Reusable parts: `create_component`
 
 `create_component` turns one container (`nodeId`: a frame, stack or grid; a
